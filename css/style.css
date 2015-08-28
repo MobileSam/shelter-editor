@@ -1,0 +1,242 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-image: url(../background.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+body > .container {
+  height: 400px;
+  width: 800px;
+  margin: -200px 0 0 -400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0;
+}
+
+.tabs {
+  height: 30px;
+  position: absolute;
+  top: -5px;
+}
+
+.tab {
+  line-height: 30px;
+  display: inline-block;
+  border: 4px solid transparent;
+  color: #ddd;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0 20px;
+}
+
+.tab:first-child {
+  border-color: transparent;
+  color: #f1f1f1;
+  padding-left: 0;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+a.tab:hover,
+a.tab:active,
+a.tab:focus {
+  color: #333;
+  text-decoration: none;
+}
+
+.tab.active {
+  border-color: #467bb7;
+  border-bottom-color: #fff;
+  color: #333;
+  background-color: #fff;
+}
+
+.row.tabs,
+.row.box,
+.row.save {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.box {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  height: 320px;
+  width: 100%;
+  border: 4px solid #467bb7;
+  border-radius: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #fff;
+  position: relative;
+}
+
+.box.hover::after {
+  content: '';
+  display: block;
+
+  width: 250px;
+  height: 260px;
+
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  background-image: url(../fallout.png);
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+
+.ready .list-group-item:first-child {
+  border-radius: 0;
+  border-top-width: 0;
+}
+
+.ready .list-group-item:last-child {
+  border-radius: 0;
+  border-bottom-width: 0;
+}
+
+.ready .list-group-item {
+  border-left-width: 0;
+}
+
+.dwellers {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.dweller_info,
+.vault_info {
+  height: 100%;
+  padding: 15px 15px 15px 0;
+}
+
+.vault_info {
+  padding: 15px;
+}
+
+.stat {
+  width: 14.285714286%;
+}
+
+.stat label {
+  width: 100%;
+  text-align: center;
+}
+
+.stat:first-child {
+  display: none;
+}
+
+.stat input.form-control {
+  padding: 5px;
+  text-align: center;
+}
+
+.stat .bar {
+  width: 15px;
+  height: 65px;
+  border: 1px solid #ccc;
+  position: relative;
+  margin: 0 auto 10px;
+}
+
+.stat .bar::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #72beb2;
+}
+
+.stat .bar.value0::after {
+  height: 0%;
+}
+
+.stat .bar.value1::after {
+  height: 10%;
+}
+
+.stat .bar.value2::after {
+  height: 20%;
+}
+
+.stat .bar.value3::after {
+  height: 30%;
+}
+
+.stat .bar.value4::after {
+  height: 40%;
+}
+
+.stat .bar.value5::after {
+  height: 50%;
+}
+
+.stat .bar.value6::after {
+  height: 60%;
+}
+
+.stat .bar.value7::after {
+  height: 70%;
+}
+
+.stat .bar.value8::after {
+  height: 80%;
+}
+
+.stat .bar.value9::after {
+  height: 90%;
+}
+
+.stat .bar.value10::after {
+  height: 100%;
+}
+
+.instructions {
+  color: #aaa;
+  width: 300px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -150px;
+}
+
+.boy {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  width: 250px;
+}
+
+/* Bootstrap Override */
+
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover {
+  background-color: #72beb2;
+  border-color: #72beb2;
+}
+
+a.list-group-item, a.list-group-item, button.list-group-item, button.list-group-item {
+  background-color: #fff;
+}
+
+.btn-primary {
+  background-color: #467bb7;
+  border-color: #567997;
+}

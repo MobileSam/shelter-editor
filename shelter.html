@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Fallout Shelter - Save Editor</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body ng-app="shelter" ng-controller="dwellerController">
+    <div class="container">
+
+      <div class="row box" ng-show="section == 'vault'">
+        <div class="col-md-12 vault_info">
+
+          <form ng-show="fileName" name="vaultForm">
+            <div class="form-group" ng-class="{ 'has-error': vaultForm.vaultName.$invalid }">
+              <label>Name</label>
+              <input type="text" class="form-control" name="vaultName" placeholder="Vault Name" ng-model="save.vault.VaultName" ng-pattern="/^[0-9]{3}$/">
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>Caps</label>
+                <input type="number" class="form-control" name="caps" ng-model="save.vault.storage.resources.Nuka">
+              </div>
+
+              <div class="col-md-4">
+                <label>Lunch Boxes</label>
+                <input type="number" class="form-control" name="lunchbox" ng-model="lunchboxCount">
+              </div>
+
+              <div class="col-md-4">
+                <label>Mr. Handies</label>
+                <input type="number" class="form-control" name="handy" ng-model="handyCount">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>Food</label>
+                <input type="number" class="form-control" name="caps" ng-model="save.vault.storage.resources.Food">
+              </div>
+
+              <div class="col-md-4">
+                <label>Energy</label>
+                <input type="number" class="form-control" name="energy" ng-model="save.vault.storage.resources.Energy">
+              </div>
+
+              <div class="col-md-4">
+                <label>Water</label>
+                <input type="number" class="form-control" name="water" ng-model="save.vault.storage.resources.Water">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-6">
+                <label>Stimpack</label>
+                <input type="number" class="form-control" name="stimpack" ng-model="save.vault.storage.resources.StimPack">
+              </div>
+
+              <div class="col-md-6">
+                <label>RadAway</label>
+                <input type="number" class="form-control" name="radaway" ng-model="save.vault.storage.resources.RadAway">
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="row box" ng-show="section == 'dwellers'">
+        <div class="dwellers list-group col-md-4">
+          <a ng-repeat="d in save.dwellers.dwellers" ng-click="editDweller(d)" ng-class="{ 'active': dweller == d }" class="list-group-item">{{ d.name }} {{ d.lastName }}</a>
+        </div>
+
+        <div class="dweller_info col-md-8" ng-hide="!dweller.name">
+
+          <form name="dwellerForm">
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>First Name</label>
+                <input type="text" class="form-control" name="firstName" placeholder="First Name" ng-model="dweller.name">
+              </div>
+
+              <div class="col-md-4">
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="lastName" placeholder="Last Name" ng-model="dweller.lastName">
+              </div>
+
+              <div class="col-md-4">
+                <label>Gender</label>
+                <select class="form-control" name="gender" ng-model="dweller.gender" ng-options="key*1 as value for (key,value) in { 1: 'Female', 2: 'Male' }"></select>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-4">
+                <label>Happiness</label>
+                <input type="number" class="form-control" name="happiness" ng-model="dweller.happiness.happinessValue">
+              </div>
+
+              <div class="col-md-4">
+                <label>Health</label>
+                <input type="number" class="form-control" name="health" ng-model="dweller.health.healthValue">
+              </div>
+
+              <div class="col-md-4">
+                <label>Radiation</label>
+                <input type="number" class="form-control" name="radiation" ng-model="dweller.health.radiationValue">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-md-1 stat" ng-repeat="stat in dweller.stats.stats">
+                <label ng-bind="statsName[$index]" class="center"></label>
+
+                <div class="bar" ng-class="'value' + stat.value"></div>
+                <input type="number" class="form-control" ng-model="stat.value" min="0" max="10">
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
+      <div class="row tabs">
+        <a href="#" class="tab">Fallout Shelter - Save Editor</a>
+        <a href="#shelter" ng-hide="!save.dwellers" class="tab" ng-click="section = 'vault'" ng-class="{ 'active': section == 'vault' }">Vault {{ save.vault.VaultName }}<small></small></a>
+        <a href="#dweller" ng-hide="!save.dwellers" class="tab" ng-click="section = 'dwellers'" ng-class="{ 'active': section == 'dwellers' }">Dwellers <small>({{ save.dwellers.dwellers.length }})</small></a>
+      </div>
+
+      <div class="row save">
+        <button class="btn btn-primary pull-right" ng-click="download()" ng-show="fileName">Save</button>
+      </div>
+
+      <div class="instructions">
+        Drag a save file here (e.g. Vault1.sav)
+      </div>
+    </div>
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/json2.min.js"></script>
+    <script src="js/shelter.js"></script>
+  </body>
+
+</html>
