@@ -1269,6 +1269,13 @@ function encrypt(fileName, save) {
   saveAs(blob, fileName.replace(".txt", ".sav").replace(".json", ".sav"))
 }
 
+document.getElementById("sav_file").addEventListener("change", function (e) {
+  $('.box').removeClass('hover').addClass('ready');
+  $('.instructions').hide();
+
+  handleFileSelect(e);
+}, false);
+
 document.ondragover = document.ondrop = function (e) {
   e.preventDefault();
   return false;
