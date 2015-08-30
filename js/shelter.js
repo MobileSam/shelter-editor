@@ -1340,7 +1340,6 @@ app.controller('dwellerController', function ($scope) {
     },
     set: function (val) {
       _save = val;
-      $scope.dweller = $scope.save.dwellers.dwellers[0];
 
       extractCount();
     }
@@ -1370,6 +1369,10 @@ app.controller('dwellerController', function ($scope) {
 
   $scope.editDweller = function (dweller) {
     $scope.dweller = dweller;
+  };
+
+  $scope.closeDweller = function (dweller) {
+    $scope.dweller = {};
   };
 
   $scope.download = function () {
