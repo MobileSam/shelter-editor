@@ -1330,6 +1330,9 @@ app.controller('dwellerController', function ($scope) {
   $scope.dweller = {};
   $scope.statsName = ['Unknown', 'S.', 'P.', 'E.', 'C.', 'I.', 'A.', 'L.'];
 
+  $scope.wastelandTeams = [];
+  $scope.team = {};
+
   var _save = {},
     _lunchboxCount = 0,
     _handyCount = 0;
@@ -1342,12 +1345,13 @@ app.controller('dwellerController', function ($scope) {
       _save = val;
 
       extractCount();
+      extractTeams();
     }
   });
 
   Object.defineProperty($scope, 'lunchboxCount', {
     get: function () {
-      return _lunchboxCount
+      return _lunchboxCount;
     },
     set: function (val) {
       _lunchboxCount = val;
@@ -1358,12 +1362,38 @@ app.controller('dwellerController', function ($scope) {
 
   Object.defineProperty($scope, 'handyCount', {
     get: function () {
-      return _handyCount
+      return _handyCount;
     },
     set: function (val) {
       _handyCount = val;
 
       updateCount();
+    }
+  });
+
+  Object.defineProperty($scope, 'timeSpent', {
+    get: function () {
+      if ($scope.save.timeMgr) {
+        return $scope.save.timeMgr.time - $scope.team.expeditionStartTime;
+      }
+
+      return 0;
+    },
+    set: function (val) {
+      $scope.team.expeditionStartTime = $scope.save.timeMgr.time - val;
+
+      updateTeam();
+    }
+  });
+
+  Object.defineProperty($scope, 'returnDuration', {
+    get: function () {
+      return $scope.team.returnTripDuration;
+    },
+    set: function (val) {
+      $scope.team.returnTripDuration = val;
+
+      updateTeam();
     }
   });
 
@@ -1381,8 +1411,16 @@ app.controller('dwellerController', function ($scope) {
     $scope.dweller.stats.stats[7].value = 10;
   };
 
-  $scope.closeDweller = function (dweller) {
+  $scope.closeDweller = function () {
     $scope.dweller = {};
+  };
+
+  $scope.editTeam = function (team) {
+    $scope.team = team;
+  };
+
+  $scope.closeTeam = function () {
+    $scope.team = {};
   };
 
   $scope.download = function () {
@@ -1413,5 +1451,37 @@ app.controller('dwellerController', function ($scope) {
         types.push(1);
       }
     }
+  }
+
+  function extractTeams() {
+    $scope.save.vault.wasteland.teams.forEach(function (team) {
+      $scope.wastelandTeams.push({
+        teamIndex: team.teamIndex,
+        dweller: findDweller(team.dwellers[0]),
+        expeditionStartTime: team.expeditionStartTime,
+        returnTripDuration: team.returnTripDuration
+      });
+    });
+  }
+
+  function findDweller(id) {
+    var dweller = null;
+
+    $scope.save.dwellers.dwellers.forEach(function (d) {
+      if (d.serializeId == id) {
+        dweller = d;
+      }
+    });
+
+    return dweller;
+  }
+
+  function updateTeam() {
+    $scope.save.vault.wasteland.teams.forEach(function (team) {
+      if (team.teamIndex == $scope.team.teamIndex) {
+        team.expeditionStartTime = $scope.team.expeditionStartTime;
+        team.returnTripDuration = $scope.team.returnTripDuration;
+      }
+    });
   }
 });

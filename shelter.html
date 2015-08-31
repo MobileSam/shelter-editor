@@ -135,10 +135,60 @@
         </div>
       </div>
 
+      <div class="row box" ng-show="section == 'wasteland'">
+        <div class="dwellers list-group col-sm-4">
+          <a ng-repeat="t in wastelandTeams" ng-click="editTeam(t);" ng-class="{ 'active': team == t }" class="list-group-item">{{ t.dweller.name }} {{ t.dweller.lastName }}</a>
+        </div>
+
+        <div class="wasteland_info col-sm-8" ng-hide="!team.dweller">
+          <a href="#" class="back_button glyphicon glyphicon-chevron-left" ng-click="closeTeam()">Back</a>
+
+          <form name="wastelandForm">
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label>Time Spent <small>(seconds)</small></label>
+                <input type="number" class="form-control" name="spent" ng-model="timeSpent">
+              </div>
+
+              <div class="col-sm-6">
+                <label>Return Duration <small>(seconds)</small></label>
+                <input type="number" class="form-control" name="return" ng-model="returnDuration">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label>Health</label>
+                <input type="number" class="form-control" name="health" ng-model="team.dweller.health.healthValue">
+              </div>
+
+              <div class="col-sm-6">
+                <label>Radiation</label>
+                <input type="number" class="form-control" name="radiation" ng-model="team.dweller.health.radiationValue">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-sm-6">
+                <label>Stimpack</label>
+                <input type="number" class="form-control" name="stimpack" ng-model="team.dweller.equipment.storage.resources.StimPack">
+              </div>
+
+              <div class="col-sm-6">
+                <label>RadAway</label>
+                <input type="number" class="form-control" name="radaway" ng-model="team.dweller.equipment.storage.resources.RadAway">
+              </div>
+            </div>
+          </form>
+
+        </div>
+      </div>
+
       <div class="row tabs">
         <a href="#" class="tab">Fallout Shelter - Save Editor</a>
         <a href="#shelter" ng-hide="!save.dwellers" class="tab" ng-click="section = 'vault'" ng-class="{ 'active': section == 'vault' }">Vault {{ save.vault.VaultName }}<small></small></a>
         <a href="#dweller" ng-hide="!save.dwellers" class="tab" ng-click="section = 'dwellers'" ng-class="{ 'active': section == 'dwellers' }">Dwellers <small>({{ save.dwellers.dwellers.length }})</small></a>
+        <a href="#wasteland" ng-hide="!wastelandTeams.length" class="tab" ng-click="section = 'wasteland'" ng-class="{ 'active': section == 'wasteland' }">Wasteland <small>({{ wastelandTeams.length }})</small></a>
       </div>
 
       <div class="row save">

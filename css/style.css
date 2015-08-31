@@ -113,6 +113,7 @@ a.tab:focus {
 }
 
 .dweller_info,
+.wasteland_info,
 .vault_info {
   height: 100%;
   padding: 15px 15px 15px 0;
@@ -281,13 +282,17 @@ a.list-group-item, a.list-group-item, button.list-group-item, button.list-group-
     top: 2px;
   }
 
+  .tab {
+    padding: 0 10px;
+  }
+
   .tab:first-child {
     color: #333;
     display: block;
   }
 
   .tab:nth-child(2) {
-    margin-left: 15px;
+    margin-left: 10px;
   }
 
   .btn {
@@ -300,7 +305,8 @@ a.list-group-item, a.list-group-item, button.list-group-item, button.list-group-
     z-index: 0;
   }
 
-  .dweller_info {
+  .dweller_info,
+  .wasteland_info {
     position: absolute;
     top: 0;
 
@@ -315,7 +321,8 @@ a.list-group-item, a.list-group-item, button.list-group-item, button.list-group-
     float: left;
   }
 
-  .dweller_info.close {
+  .dweller_info.close,
+  .wasteland_info.close {
     display: none;
   }
 
