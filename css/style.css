@@ -10,9 +10,9 @@ body {
 }
 
 body > .container {
-  height: 400px;
+  height: 450px;
   width: 800px;
-  margin: -200px 0 0 -400px;
+  margin: -225px 0 0 -400px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -67,7 +67,7 @@ a.tab:focus {
 .box {
   margin-top: 30px;
   margin-bottom: 10px;
-  height: 320px;
+  height: 370px;
   width: 100%;
   border: 4px solid #467bb7;
   border-radius: 10px;

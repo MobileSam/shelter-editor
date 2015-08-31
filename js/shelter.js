@@ -1371,6 +1371,16 @@ app.controller('dwellerController', function ($scope) {
     $scope.dweller = dweller;
   };
 
+  $scope.maxSpecial = function () {
+    $scope.dweller.stats.stats[1].value = 10;
+    $scope.dweller.stats.stats[2].value = 10;
+    $scope.dweller.stats.stats[3].value = 10;
+    $scope.dweller.stats.stats[4].value = 10;
+    $scope.dweller.stats.stats[5].value = 10;
+    $scope.dweller.stats.stats[6].value = 10;
+    $scope.dweller.stats.stats[7].value = 10;
+  };
+
   $scope.closeDweller = function (dweller) {
     $scope.dweller = {};
   };
