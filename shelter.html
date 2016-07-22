@@ -59,7 +59,22 @@
               </div>
             </div>
 
+
             <div class="form-group row">
+              <div class="col-sm-4">
+                <label>Pet Carriers</label>
+                <input type="number" class="form-control" name="pet" ng-model="petCount">
+              </div>
+
+              <div class="col-sm-4">
+                <label>Nuka Cola Quantum</label>
+                <input type="number" class="form-control" name="quantum" ng-model="save.vault.storage.resources.NukaColaQuantum">
+              </div>
+            </div>
+
+            <div class="form-group row">
+
+
               <div class="col-sm-6">
                 <label>Stimpack</label>
                 <input type="number" class="form-control" name="stimpack" ng-model="save.vault.storage.resources.StimPack">
@@ -101,7 +116,39 @@
               </div>
             </div>
 
+
             <div class="form-group row">
+              <div class="col-sm-4">
+                <label>Pregnant</label>
+                <select class="form-control" name="pregnant" ng-model="dweller.pregnant" ng-options="o.v as o.n for o in [{ n: 'Not Pregnant', v: false }, { n: 'Pregnant', v: true }]"></select>
+              </div>
+
+
+              <div class="col-sm-4">
+                <label>Baby Ready</label>
+                <select class="form-control" name="babyReady" ng-model="dweller.babyReady" ng-options="o.v as o.n for o in [{ n: 'Not Ready', v: false }, { n: 'Ready', v: true }]"></select>
+              </div>
+
+
+              <div class="col-sm-4">
+                <label>Level</label>
+                <input type="number" class="form-control" name="level" ng-model="dweller.experience.currentLevel">
+              </div>
+
+
+
+            </div>
+
+
+
+
+
+            <div class="form-group row">
+              <div class="col-sm-4">
+                <label>Experience Value</label>
+                <input type="number" class="form-control" name="experience" ng-model="dweller.experience.experienceValue">
+              </div>
+
               <div class="col-sm-4">
                 <label>Happiness</label>
                 <input type="number" class="form-control" name="happiness" ng-model="dweller.happiness.happinessValue">
@@ -111,13 +158,17 @@
                 <label>Health</label>
                 <input type="number" class="form-control" name="health" ng-model="dweller.health.healthValue">
               </div>
+            </div>
 
+            <div class="form-group row">
               <div class="col-sm-4">
                 <label>Radiation</label>
                 <input type="number" class="form-control" name="radiation" ng-model="dweller.health.radiationValue">
               </div>
             </div>
 
+            <br />
+            
             <div class="form-group row">
               <div class="col-sm-1 stat" ng-repeat="stat in dweller.stats.stats">
                 <label ng-bind="statsName[$index]" class="center"></label>
@@ -147,7 +198,9 @@
 
       <div class="instructions">
         Drag a save file here (e.g. Vault1.sav) <br />
-        or select one here <input type="file" id="sav_file" name="sav_file" />
+        or select one here
+        <input class="btn" type="file" id="sav_file" name="sav_file" />
+
       </div>
     </div>
 

@@ -109,6 +109,7 @@ $('body .container .box')
 
 // Modifications
 function edit(fileName, save) {
+
   var scope = angular.element($('body').get(0)).scope();
 
   scope.$apply(function () {
@@ -128,7 +129,8 @@ app.controller('dwellerController', function ($scope) {
 
   var _save = {},
     _lunchboxCount = 0,
-    _handyCount = 0;
+    _handyCount = 0,
+    _petCount = 0;
 
   Object.defineProperty($scope, 'save', {
     get: function () {
@@ -151,6 +153,20 @@ app.controller('dwellerController', function ($scope) {
       updateCount();
     }
   });
+
+
+
+  Object.defineProperty($scope, 'petCount', {
+    get: function () {
+      return _petCount
+    },
+    set: function (val) {
+      _petCount = val;
+
+      updateCount();
+    }
+  });
+
 
   Object.defineProperty($scope, 'handyCount', {
     get: function () {
@@ -193,6 +209,7 @@ app.controller('dwellerController', function ($scope) {
         _handyCount++;
       }
 
+      $scope.petCount = _petCount;
       $scope.lunchboxCount = _lunchboxCount;
       $scope.handyCount = _handyCount;
     });
@@ -200,13 +217,16 @@ app.controller('dwellerController', function ($scope) {
 
   function updateCount() {
     var types = $scope.save.vault.LunchBoxesByType = [],
-      count = $scope.save.vault.LunchBoxesCount = _lunchboxCount + _handyCount;
+      count = $scope.save.vault.LunchBoxesCount = _petCount + _lunchboxCount + _handyCount;
 
     for (var i = 0; i < count; i++) {
       if (i < _lunchboxCount) {
         types.push(0);
-      } else {
+      } else if(i < _lunchboxCount + _handyCount){
         types.push(1);
+      }
+      else {
+        types.push(2);
       }
     }
   }

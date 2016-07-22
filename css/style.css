@@ -67,7 +67,7 @@ a.tab:focus {
 .box {
   margin-top: 30px;
   margin-bottom: 10px;
-  height: 370px;
+  height: 410px;
   width: 100%;
   border: 4px solid #467bb7;
   border-radius: 10px;
@@ -219,7 +219,7 @@ a.tab:focus {
 
 .instructions input {
   display: inline-block;
-  max-width: 80px;
+  max-width: 120px;
 }
 
 .boy {
